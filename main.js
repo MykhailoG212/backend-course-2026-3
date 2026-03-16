@@ -30,7 +30,11 @@ try {
   }
 
   const result = data.map(item => {
-    return options.mfo ? `${item.MFO} ${item.FULLNAME}` : item.FULLNAME;
+    if (options.mfo) {
+      return `${item.MFO} ${item.FULLNAME}`;
+    } else {
+      return item.FULLNAME;
+    }
   }).join('\n');
 
   if (result) {
