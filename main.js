@@ -20,3 +20,27 @@ if (!fs.existsSync(options.input)) {
   process.stderr.write("Cannot find input file\n");
   process.exit(1);
 }
+
+try {
+  const rawData = fs.readFileSync(options.input, 'utf8');
+  let data = JSON.parse(rawData);
+
+  if (options.normal) {
+    data = data.filter(item => item.COD_STATE === 1);
+  }
+
+  const result = data.map(item => {
+    return options.mfo ? `${item.MFO} ${item.NAME}` : item.NAME;
+  }).join('\n');
+
+  if (result) {
+    if (options.display) {
+      console.log(result);
+    }
+    if (options.output) {
+      fs.writeFileSync(options.output, result);
+    }
+  }
+} catch (err) {
+  process.exit(1);
+}
