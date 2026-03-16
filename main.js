@@ -2,7 +2,7 @@ const fs = require('fs');
 const { program } = require('commander');
 
 program
-  .option('-i, --input <path>', 'шлях до вхідного файлу')
+  .option('-i, --input [path]', 'шлях до вхідного файлу')
   .option('-o, --output <path>', 'шлях до вихідного файлу')
   .option('-d, --display', 'вивести результат у консоль')
   .option('-m, --mfo', 'відображати код МФО')
